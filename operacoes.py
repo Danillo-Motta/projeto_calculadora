@@ -9,3 +9,7 @@ def calcular_subtracao(a, b):
 
 def calcular_multiplicacao(a, b):
     return a * b
+
+
+def calcular_divisao(a, b):
+    return a / b

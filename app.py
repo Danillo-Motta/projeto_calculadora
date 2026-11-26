@@ -55,5 +55,23 @@ def multiplicacao():
     resultado = operacoes.calcular_multiplicacao(valor1, valor2)
     return jsonify({"resultado": resultado})
 
+# Página de divisão
+@app.route("/divisao")
+def divisao_page():
+    return render_template("divisao.html")
+
+@app.route("/api/divisao", methods=["POST"])
+def divisao():
+    dados = request.get_json(silent=True) or {}
+    try:
+        valor1 = float(dados["valor1"])
+        valor2 = float(dados["valor2"])
+    except (KeyError, ValueError, TypeError):
+        return jsonify({"erro": "Informe dois números válidos."}), 400
+    if valor2 == 0:
+        return jsonify({"erro": "Não é possível dividir por zero."}), 400
+    resultado = operacoes.calcular_divisao(valor1, valor2)
+    return jsonify({"resultado": resultado})
+
 if __name__ == "__main__":
     app.run(debug=True)
